@@ -23,7 +23,8 @@ in
         uid = 1000;
       };
 
-      users.users.root.password  = "nixos";
+      nixpkgs.localSystem = { system = "aarch64-linux"; };
+      users.users.root.password = "nixos";
 
       # FIXME: highly insecure!
       # FIXME: Figure out why this breaks...
