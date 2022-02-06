@@ -24,7 +24,8 @@
     soc = "rockchip-rk3399s";
     ram = 1024 * 4;
     screen = {
-      width = 1920; height = 1080;
+      width = 720;
+      height = 1440;
     };
   };
 
@@ -32,7 +33,7 @@
   # By design we're not adding a U-Boot package.
   # We're starting to dogfood using Tow-Boot.
 
-  mobile.device.firmware = pkgs.callPackage ./firmware {};
+  mobile.device.firmware = pkgs.callPackage ./firmware { };
   mobile.boot.stage-1.firmware = [
     config.mobile.device.firmware
   ];
@@ -40,7 +41,7 @@
   mobile.usb.mode = "gadgetfs";
 
   # It seems Pine64 does not have an idVendor...
-  mobile.usb.idVendor = "1209";  # http://pid.codes/1209/
+  mobile.usb.idVendor = "1209"; # http://pid.codes/1209/
   mobile.usb.idProduct = "0069"; # "common tasks, such as testing, generic USB-CDC devices, etc."
 
   # Mainline gadgetfs functions
@@ -71,7 +72,7 @@
 
       # General wireless
       WIRELESS = yes;
-      
+
       # Bluetooth
       BT = yes;
       BT_HCIUART = yes;

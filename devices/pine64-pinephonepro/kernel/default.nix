@@ -1,6 +1,6 @@
-{
-  mobile-nixos
+{ mobile-nixos
 , fetchFromGitLab
+, fetchurl
 , ...
 }:
 
@@ -26,6 +26,13 @@ mobile-nixos.kernel-builder {
     ./0001-arm64-dts-rockchip-set-type-c-dr_mode-as-otg.patch
     ./0001-usb-dwc3-Enable-userspace-role-switch-control.patch
     ./0001-dts-pinephone-pro-Setup-default-on-and-panic-LEDs.patch
+
+    # patchurl is required since it's a bundle of multiple commits,
+    # and fetchpatch's normalization ruins the ordering
+    (fetchurl {
+      url = "https://github.com/dreemurrs-embedded/Pine64-Arch/raw/32639373a6332822faec5952d844c62e3acb6e2f/PKGBUILDS/pine64/linux-megi/pp-keyboard.patch";
+      sha256 = "sha256-N8+ZhKGgafWknvekThhutMX6coOu/QHUX0eY1k0Ax1Q=";
+    })
   ];
 
   postInstall = ''
